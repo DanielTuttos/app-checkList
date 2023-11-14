@@ -5,33 +5,22 @@
  * @format
  */
 
-import React, {useEffect} from 'react';
-import {SafeAreaView, Text, useColorScheme} from 'react-native';
-
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-
-import SQLite from 'react-native-sqlite-storage';
+import React from 'react';
+import {SafeAreaView, Text, Button} from 'react-native';
+import {
+  getLists,
+  insertList,
+} from './src/services';
+import { DbContextProvider, useDBContext } from './src/context/DBContext';
+import { SQLiteDatabase } from 'react-native-sqlite-storage';
+import { Home } from './src/screens';
 
 function App(): JSX.Element {
-  useEffect(() => {
-    enabledDataBase();
-  }, []);
-
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  const enabledDataBase = () => {
-    SQLite.enablePromise(true);
-    console.log('ejecutando sqlite, ', SQLite);
-  };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <Text>Hello</Text>
-    </SafeAreaView>
+    <DbContextProvider>
+      <Home />
+    </DbContextProvider>
   );
 }
 
