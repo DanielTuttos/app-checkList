@@ -16,7 +16,7 @@ export async function getDBConnection() {
 
 export async function createTable(db: SQLiteDatabase) {
   const query =
-    'CREATE TABLE IF NOT EXISTS lists(id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(255), description VARCHAR)';
+    'CREATE TABLE IF NOT EXISTS lists(id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(255), description VARCHAR, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)';
   return await db.executeSql(query);
 }
 
