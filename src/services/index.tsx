@@ -14,31 +14,36 @@ export async function getDBConnection() {
   return db;
 }
 
-export async function createTable(db: SQLiteDatabase) {
-  const query =
-    'CREATE TABLE IF NOT EXISTS lists(id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(255), description VARCHAR, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)';
+export async function createTable(db: SQLiteDatabase, query: string) {
+  // const query =
+  //   'CREATE TABLE IF NOT EXISTS lists(id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(255), description VARCHAR, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)';
   return await db.executeSql(query);
 }
 
-export async function initDataBase() {
-  try {
-    const db = await getDBConnection();
-    await createTable(db);
-    db.close();
-  } catch (error) {
-    console.log(error);
-  }
+export async function createTables(db: SQLiteDatabase) {
+  await createTable(
+    db,
+    'CREATE TABLE IF NOT EXISTS "group"(id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(255), description VARCHAR, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)',
+  );
+  await createTable(
+    db,
+    'CREATE TABLE IF NOT EXISTS lists(id INTEGER PRIMARY KEY AUTOINCREMENT, description VARCHAR, ischeck BOOLEAN DEFAULT false, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, id_group INTEGER, FOREIGN KEY (id_group) REFERENCES "group"(id) )',
+  );
 }
 
-export async function insertList(db: SQLiteDatabase, title: string, description?: string) {
-  const insertQuery = `INSERT INTO lists (title, description) values ('${title}', '${description}')`;
+export async function insertList(
+  db: SQLiteDatabase,
+  title: string,
+  description?: string,
+) {
+  const insertQuery = `INSERT INTO "group" (title, description) values ('${title}', '${description}')`;
   const result = await db.executeSql(insertQuery);
   return result;
 }
 
 export async function getLists(db: SQLiteDatabase) {
   const lists: Lists[] = [];
-  const results = await db.executeSql('SELECT * FROM lists');
+  const results = await db.executeSql('SELECT * FROM "group"');
   console.log('results: ', results);
   results.forEach(result => {
     for (let index = 0; index < result.rows.length; index++) {

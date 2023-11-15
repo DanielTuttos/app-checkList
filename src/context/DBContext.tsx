@@ -1,5 +1,5 @@
 import React, {createContext, useContext, useState, useEffect} from 'react';
-import {createTable, getDBConnection} from '../services';
+import {createTables, getDBConnection} from '../services';
 import {SQLiteDatabase} from 'react-native-sqlite-storage';
 import {Text} from 'react-native';
 
@@ -13,15 +13,15 @@ export function DbContextProvider({children}: any) {
   const [isLoading, setIsLoading] = useState(true);
   const [db, setDb] = useState<SQLiteDatabase>({} as SQLiteDatabase);
   useEffect(() => {
-    let _db: SQLiteDatabase ;
+    let _db: SQLiteDatabase;
     const getConnection = async () => {
       try {
         _db = await getDBConnection();
-        await createTable(_db);
+        await createTables(_db);
         setDb(_db);
         setIsLoading(false);
       } catch (error) {
-        console.log({error});
+        console.log('DbContextProvider', {error});
       }
     };
     getConnection();
