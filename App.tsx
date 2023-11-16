@@ -6,21 +6,20 @@
  */
 
 import React from 'react';
-import {SafeAreaView, Text, Button} from 'react-native';
-import {
-  getLists,
-  insertList,
-} from './src/services';
-import { DbContextProvider, useDBContext } from './src/context/DBContext';
-import { SQLiteDatabase } from 'react-native-sqlite-storage';
-import { Home } from './src/screens';
+import {DbContextProvider} from './src/context/DBContext';
+// import {SQLiteDatabase} from 'react-native-sqlite-storage';
+// import {Home} from './src/screens';
+import {NavigationContainer} from '@react-navigation/native';
+import {TabNavigator} from './src/navigator';
 
 function App(): JSX.Element {
-
   return (
-    <DbContextProvider>
-      <Home />
-    </DbContextProvider>
+    <NavigationContainer>
+      <DbContextProvider>
+        {/* <Home /> */}
+        <TabNavigator />
+      </DbContextProvider>
+    </NavigationContainer>
   );
 }
 
