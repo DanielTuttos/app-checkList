@@ -1,10 +1,10 @@
 import React from 'react';
 import {Button, SafeAreaView, Text} from 'react-native';
-import {getLists, insertList} from '../services';
-import {useDBContext} from '../context/DBContext';
+import {getLists, insertList} from '../../services';
+import {useDBContext} from '../../context/DBContext';
 import {SQLiteDatabase} from 'react-native-sqlite-storage';
 
-const Home = () => {
+const List = () => {
 
   const db = useDBContext() as SQLiteDatabase;
   console.log('db en app: ', db);
@@ -34,4 +34,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default List;

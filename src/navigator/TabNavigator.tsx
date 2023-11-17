@@ -1,6 +1,6 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Favorites, Home} from '../screens';
+import {Favorites, Home, List} from '../screens';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 // import {Tab} from '@react-navigation/buttons-tab';
 
@@ -9,6 +9,7 @@ const TabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
+        headerShown: false,
         tabBarIcon: ({focused, color, size}) => {
           let iconName: string = '';
           if (route.name === 'List') {
@@ -23,7 +24,7 @@ const TabNavigator = () => {
         tabBarActiveTintColor: 'tomato',
         tabBarInactiveTintColor: 'gray',
       })}>
-      <Tab.Screen name="List" component={Home} />
+      <Tab.Screen name="List" component={List} />
       <Tab.Screen name="Favorites" component={Favorites} />
     </Tab.Navigator>
   );

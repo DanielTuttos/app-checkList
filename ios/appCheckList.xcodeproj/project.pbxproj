@@ -14,8 +14,8 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-appCheckList-appCheckListTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-appCheckList-appCheckListTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		9E7BAB412B05B76B009F795A /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E7BAB402B05B76B009F795A /* Ionicons.ttf */; };
-		9E7BAB422B05B76B009F795A /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E7BAB402B05B76B009F795A /* Ionicons.ttf */; };
+		9EEEFA8E2B06B243005B1C77 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9EEEFA912B06B243005B1C77 /* Ionicons.ttf */; };
+		9EEEFA8F2B06B243005B1C77 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9EEEFA912B06B243005B1C77 /* Ionicons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +45,7 @@
 		5DCACB8F33CDC322A6C60F78 /* libPods-appCheckList.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-appCheckList.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = appCheckList/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-appCheckList-appCheckListTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appCheckList-appCheckListTests.release.xcconfig"; path = "Target Support Files/Pods-appCheckList-appCheckListTests/Pods-appCheckList-appCheckListTests.release.xcconfig"; sourceTree = "<group>"; };
-		9E7BAB402B05B76B009F795A /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
+		9EEEFA902B06B243005B1C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/Ionicons.ttf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -144,7 +144,7 @@
 		9E7BAB3F2B05B686009F795A /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				9E7BAB402B05B76B009F795A /* Ionicons.ttf */,
+				9EEEFA912B06B243005B1C77 /* Ionicons.ttf */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -247,7 +247,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E7BAB422B05B76B009F795A /* Ionicons.ttf in Resources */,
+				9EEEFA8F2B06B243005B1C77 /* Ionicons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +257,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				9E7BAB412B05B76B009F795A /* Ionicons.ttf in Resources */,
+				9EEEFA8E2B06B243005B1C77 /* Ionicons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +440,17 @@
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9EEEFA912B06B243005B1C77 /* Ionicons.ttf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9EEEFA902B06B243005B1C77 /* Base */,
+			);
+			name = Ionicons.ttf;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
