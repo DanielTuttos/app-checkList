@@ -1,0 +1,42 @@
+import {StyleSheet} from 'react-native';
+import {colors, text} from '../../theme';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
+
+console.log('wp: ', wp(4.3))
+
+export const styles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.backgroundPrimary,
+    flex: 1,
+  },
+  header: {
+    backgroundColor: colors.backgroundPrimary,
+    height: hp(6),
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    paddingHorizontal: wp(1.5)
+  },
+  iconContainer: {
+    minWidth: wp(7.5),
+    // backgroundColor: 'red'
+  },
+  title: {
+    fontSize: text.title,
+    fontWeight: '700',
+    marginLeft: wp(1)
+  }
+});
