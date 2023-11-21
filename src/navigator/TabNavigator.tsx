@@ -2,6 +2,7 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Favorites, Home, List} from '../screens';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {colors, text} from '../theme';
 // import {Tab} from '@react-navigation/buttons-tab';
 
 const TabNavigator = () => {
@@ -12,20 +13,26 @@ const TabNavigator = () => {
         headerShown: false,
         tabBarIcon: ({focused, color, size}) => {
           let iconName: string = '';
-          if (route.name === 'List') {
+          if (route.name === 'Listas') {
             iconName = focused ? 'list' : 'list-outline';
-          } else if (route.name === 'Favorites') {
+          } else if (route.name === 'Favoritos') {
             iconName = focused ? 'star' : 'star-outline';
           }
-
-          // You can return any component that you like here!
           return <Ionicons name={iconName} color={color} size={size} />;
         },
-        tabBarActiveTintColor: 'tomato',
-        tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.backgroundPrimary,
+        tabBarStyle: {
+          backgroundColor: colors.backgroundSecondary,
+          height: 80,
+          paddingBottom: 30,
+        },
+        tabBarLabelStyle: {
+          fontSize: text.caption
+        }
       })}>
-      <Tab.Screen name="List" component={List} />
-      <Tab.Screen name="Favorites" component={Favorites} />
+      <Tab.Screen name="Listas" component={List} />
+      <Tab.Screen name="Favoritos" component={Favorites} />
     </Tab.Navigator>
   );
 };
