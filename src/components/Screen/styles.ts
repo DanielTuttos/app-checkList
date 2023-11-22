@@ -5,8 +5,6 @@ import {
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 
-console.log('wp: ', wp(4.3))
-
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.backgroundPrimary,
@@ -37,6 +35,7 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: text.title,
     fontWeight: '700',
-    marginLeft: wp(1)
+    marginLeft: wp(1),
+    color: colors.textPrimary
   }
 });

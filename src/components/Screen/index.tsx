@@ -1,15 +1,8 @@
-import React, {ReactNode, JSX} from 'react';
+import React, {JSX} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
-import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import {colors} from '../../theme';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {styles} from './styles';
-
-interface ScreenProps {
-  title: string;
-  children: ReactNode;
-  goBack?: () => void;
-}
+import { ScreenProps } from '../../interfaces/components/screen';
 
 const ScreenComponent: React.FC<ScreenProps> = props => {
   const {children, title, goBack} = props;

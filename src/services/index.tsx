@@ -3,7 +3,7 @@ import {
   enablePromise,
   openDatabase,
 } from 'react-native-sqlite-storage';
-import {Lists} from '../interfaces/Lists';
+import {Lists} from '../interfaces/screen/Lists';
 
 enablePromise(true);
 
@@ -23,7 +23,7 @@ export async function createTable(db: SQLiteDatabase, query: string) {
 export async function createTables(db: SQLiteDatabase) {
   await createTable(
     db,
-    'CREATE TABLE IF NOT EXISTS "group"(id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(255), description VARCHAR, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)',
+    'CREATE TABLE IF NOT EXISTS "group"(id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(255), description VARCHAR, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, is_fav BOOLEAN DEFAULT false)',
   );
   await createTable(
     db,
@@ -41,15 +41,14 @@ export async function insertList(
   return result;
 }
 
-export async function getLists(db: SQLiteDatabase) {
-  const lists: Lists[] = [];
-  const results = await db.executeSql('SELECT * FROM "group"');
-  console.log('results: ', results);
+export async function getLists(db: SQLiteDatabase, table: string) {
+  const lists: any[] = [];
+  const results = await db.executeSql(`SELECT * FROM "${table}"`);
   results.forEach(result => {
     for (let index = 0; index < result.rows.length; index++) {
       lists.push(result.rows.item(index));
     }
   });
-  console.log('lists: ', lists);
+  // console.log('lists: ', lists);
   return lists;
 }
