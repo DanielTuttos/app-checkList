@@ -1,8 +1,8 @@
 import React, {JSX} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {styles} from './styles';
-import { ScreenProps } from '../../interfaces/components/screen';
+import {ScreenProps} from '../../interfaces/components/screen';
 
 const ScreenComponent: React.FC<ScreenProps> = props => {
   const {children, title, goBack} = props;
@@ -20,10 +20,10 @@ const ScreenComponent: React.FC<ScreenProps> = props => {
     );
   };
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {getHeader()}
       {children}
-    </View>
+    </SafeAreaView>
   );
 };
 

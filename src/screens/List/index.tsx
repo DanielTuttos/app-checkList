@@ -1,17 +1,20 @@
 import React, {useEffect, useState} from 'react';
-import {View, FlatList, Button} from 'react-native';
+import {View, FlatList} from 'react-native';
 import {getLists, insertList} from '../../services';
 import {useDBContext} from '../../context/DBContext';
 import {SQLiteDatabase} from 'react-native-sqlite-storage';
 import {CardGroup, FloatingButton, ScreenComponent} from '../../components';
 import {styles} from './styles';
-import {Lists} from '../../interfaces/screen/Lists';
+import {ListScreenNavigationProp, Lists} from '../../interfaces/screen/Lists';
+import {useNavigation} from '@react-navigation/native';
 
 const List = () => {
   const db = useDBContext() as SQLiteDatabase;
 
   const [dataList, setDataList] = useState<Lists[]>([]);
   // console.log('dataList ', dataList);
+
+  const navigation = useNavigation<ListScreenNavigationProp>();
 
   useEffect(() => {
     getList();
@@ -49,7 +52,7 @@ const List = () => {
             return <CardGroup key={item.id} item={item} />;
           }}
         />
-        <FloatingButton onPress={() => console.log('presionando nuevo')} />
+        <FloatingButton onPress={() => navigation.navigate('NewList')} />
       </View>
     </ScreenComponent>
   );
