@@ -1,12 +1,11 @@
-import { createStackNavigator } from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import { Home } from '../screens';
-// import { Movie } from '../interfaces/movieInterfaces';
-// import { DetailScreen } from '../screens/DetailScreen';
-// import { HomeScreen } from '../screens/HomeScreen';
+import {Home, List, NewList} from '../screens';
 
 export type RootStackParams = {
   Home: undefined;
+  NewList: undefined;
+  List: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParams>();
@@ -14,6 +13,7 @@ const Stack = createStackNavigator<RootStackParams>();
 const Navigator = () => {
   return (
     <Stack.Navigator
+      initialRouteName="Home"
       screenOptions={{
         headerShown: false,
         cardStyle: {
@@ -21,6 +21,8 @@ const Navigator = () => {
         },
       }}>
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="List" component={List} />
+      <Stack.Screen name="NewList" component={NewList} />
     </Stack.Navigator>
   );
 };
