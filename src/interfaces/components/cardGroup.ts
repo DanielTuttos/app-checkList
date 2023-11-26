@@ -1,5 +1,6 @@
-import { Lists } from "../screen/Lists";
+import { ListScreenNavigationProp, Lists } from "../screen/Lists";
 
 export interface CardGroupProps {
-    item: Lists
+    item: Lists,
+    navigation: ListScreenNavigationProp
 }

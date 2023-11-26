@@ -1,10 +1,11 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {Home, List, NewList} from '../screens';
+import { Lists } from '../interfaces/screen/Lists';
 
 export type RootStackParams = {
   Home: undefined;
-  NewList: undefined;
+  NewList: {item?: Lists};
   List: undefined;
 };
 

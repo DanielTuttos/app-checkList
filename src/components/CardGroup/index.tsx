@@ -6,16 +6,16 @@ import {colors} from '../../theme';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import FloatingButton from '../FloatingButton';
 
-const CardGroup: React.FC<CardGroupProps> = ({item}) => {
+const CardGroup: React.FC<CardGroupProps> = ({item, navigation}) => {
   const openCard = () => {
-    console.log('open card: ', item.id);
+    navigation.navigate('NewList', {item});
   };
   const addFavotire = () => {
-    console.log('add favorite: ', item.id)
-  }
+    console.log('add favorite: ', item.id);
+  };
   const deleteCard = () => {
-    console.log('delete: ', item.id)
-  }
+    console.log('delete: ', item.id);
+  };
   return (
     <TouchableOpacity onPress={openCard} style={styles.container}>
       <View>

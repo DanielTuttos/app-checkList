@@ -49,10 +49,12 @@ const List = () => {
           style={styles.list}
           data={dataList}
           renderItem={({item}) => {
-            return <CardGroup key={item.id} item={item} />;
+            return <CardGroup key={item.id} item={item} navigation={navigation} />;
           }}
         />
-        <FloatingButton onPress={() => navigation.navigate('NewList')} />
+        <FloatingButton
+          onPress={() => navigation.navigate('NewList', {})}
+        />
       </View>
     </ScreenComponent>
   );
