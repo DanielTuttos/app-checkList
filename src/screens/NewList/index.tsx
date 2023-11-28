@@ -1,12 +1,16 @@
 import React, {useState} from 'react';
 import {Text, View} from 'react-native';
-import {InputText, ScreenComponent} from '../../components';
+import {Buttons, InputText, ScreenComponent} from '../../components';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {
   NewListScreenNavigationProp,
   NewListScreenRouteProp,
 } from '../../interfaces/screen/NewList';
 import {styles} from './styles';
+import {useDBContext} from '../../context/DBContext';
+import {SQLiteDatabase} from 'react-native-sqlite-storage';
+import {insertList} from '../../services';
+import Toast from 'react-native-toast-message';
 
 const NewList = () => {
   const route = useRoute<NewListScreenRouteProp>();
@@ -15,9 +19,31 @@ const NewList = () => {
   } = route;
   const navigation = useNavigation<NewListScreenNavigationProp>();
   console.log('navgation: ', navigation, item);
-  const [description, setDescription] = useState(item ? item.description || '' : '');
+  const [description, setDescription] = useState(
+    item ? item.description || '' : '',
+  );
   const [title, setTitle] = useState(item ? item.title : '');
-  const [isEditable, setIsEditable] = useState(item ? false : true)
+  const [isEditable, setIsEditable] = useState(item ? false : true);
+
+  const editData = item ? true : false;
+
+  const db = useDBContext() as SQLiteDatabase;
+
+  const createList = async () => {
+    try {
+      if (!title) {
+        return Toast.show({
+          type: 'error',
+          text1: 'Hello',
+          text2: 'This is some something 👋',
+        });
+      }
+      const data = await insertList(db, title, description);
+      console.log('data: ', data);
+    } catch (error) {
+      console.log('error; ', {error});
+    }
+  };
 
   return (
     <ScreenComponent
@@ -37,6 +63,11 @@ const NewList = () => {
           multiline
           numberOfLine={4}
           editable={isEditable}
+        />
+        <Buttons
+          label={editData ? 'Editar' : 'Guardar'}
+          onPress={() => (editData ? console.log('editar') : createList())}
+          nameIcon={editData ? 'create-outline' : 'save-outline'}
         />
       </View>
     </ScreenComponent>

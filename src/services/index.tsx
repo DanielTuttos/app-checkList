@@ -38,12 +38,13 @@ export async function insertList(
 ) {
   const insertQuery = `INSERT INTO "group" (title, description) values ('${title}', '${description}')`;
   const result = await db.executeSql(insertQuery);
+  console.log('result insert: ', result[0].rows.item(0));
   return result;
 }
 
 export async function getLists(db: SQLiteDatabase, table: string) {
   const lists: any[] = [];
-  const results = await db.executeSql(`SELECT * FROM "${table}"`);
+  const results = await db.executeSql(`SELECT * FROM "${table}" ORDER BY created_at DESC`);
   results.forEach(result => {
     for (let index = 0; index < result.rows.length; index++) {
       lists.push(result.rows.item(index));

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {View, FlatList} from 'react-native';
 import {getLists, insertList} from '../../services';
 import {useDBContext} from '../../context/DBContext';
@@ -6,7 +6,7 @@ import {SQLiteDatabase} from 'react-native-sqlite-storage';
 import {CardGroup, FloatingButton, ScreenComponent} from '../../components';
 import {styles} from './styles';
 import {ListScreenNavigationProp, Lists} from '../../interfaces/screen/Lists';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 
 const List = () => {
   const db = useDBContext() as SQLiteDatabase;
@@ -16,22 +16,11 @@ const List = () => {
 
   const navigation = useNavigation<ListScreenNavigationProp>();
 
-  useEffect(() => {
-    getList();
-  }, []);
-
-  // const insert = async () => {
-  //   try {
-  //     const data = await insertList(
-  //       db,
-  //       `Hola que tal ${Math.random()}`,
-  //       'una nueva descripcion',
-  //     );
-  //     console.log('data: ', data);
-  //   } catch (error) {
-  //     console.log('error; ', {error});
-  //   }
-  // };
+  useFocusEffect(
+    useCallback(() => {
+      getList();
+    }, []),
+  );
 
   const getList = async () => {
     try {
@@ -49,12 +38,12 @@ const List = () => {
           style={styles.list}
           data={dataList}
           renderItem={({item}) => {
-            return <CardGroup key={item.id} item={item} navigation={navigation} />;
+            return (
+              <CardGroup key={item.id} item={item} navigation={navigation} />
+            );
           }}
         />
-        <FloatingButton
-          onPress={() => navigation.navigate('NewList', {})}
-        />
+        <FloatingButton onPress={() => navigation.navigate('NewList', {})} />
       </View>
     </ScreenComponent>
   );
