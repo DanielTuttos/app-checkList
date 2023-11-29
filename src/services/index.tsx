@@ -15,8 +15,6 @@ export async function getDBConnection() {
 }
 
 export async function createTable(db: SQLiteDatabase, query: string) {
-  // const query =
-  //   'CREATE TABLE IF NOT EXISTS lists(id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(255), description VARCHAR, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)';
   return await db.executeSql(query);
 }
 
@@ -38,13 +36,14 @@ export async function insertList(
 ) {
   const insertQuery = `INSERT INTO "group" (title, description) values ('${title}', '${description}')`;
   const result = await db.executeSql(insertQuery);
-  console.log('result insert: ', result[0].rows.item(0));
   return result;
 }
 
 export async function getLists(db: SQLiteDatabase, table: string) {
   const lists: any[] = [];
-  const results = await db.executeSql(`SELECT * FROM "${table}" ORDER BY created_at DESC`);
+  const results = await db.executeSql(
+    `SELECT * FROM "${table}" ORDER BY created_at DESC`,
+  );
   results.forEach(result => {
     for (let index = 0; index < result.rows.length; index++) {
       lists.push(result.rows.item(index));
@@ -52,4 +51,13 @@ export async function getLists(db: SQLiteDatabase, table: string) {
   });
   // console.log('lists: ', lists);
   return lists;
+}
+
+export async function getInformationById(
+  db: SQLiteDatabase,
+  table: string,
+  id: number,
+) {
+  const result = await db.executeSql(`SELECT * FROM "${table}" WHERE id=${id}`);
+  return result[0].rows.item(0);
 }
