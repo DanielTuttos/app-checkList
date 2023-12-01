@@ -11,7 +11,7 @@ const InputText: React.FC<InputTextProps> = ({
   customStyle,
   multiline = false,
   numberOfLine = 1,
-  editable = false
+  editable = true
 }) => {
   return (
     <TextInput

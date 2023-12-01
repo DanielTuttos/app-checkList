@@ -4,6 +4,7 @@ export const colors = {
   secondary: '#EDF2FA', // background o text
   backgroundPrimary: '#ffffff', // background o text
   backgroundSecondary: '#09184d', // background menu
+  backgroundTertiary: '#ded2ff',
 //   backgroundTerteary: '#132151', // background menu
   textPrimary: '#2F2E2E', // titles
   textSecondary: '#808085', // info

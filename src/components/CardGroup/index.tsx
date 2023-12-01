@@ -22,9 +22,6 @@ const CardGroup: React.FC<CardGroupProps> = ({item, navigation}) => {
         <Text numberOfLines={1} style={styles.title}>
           {item.title}
         </Text>
-        <Text numberOfLines={2} style={styles.description}>
-          {item.description}
-        </Text>
         <Text style={styles.date}>{item.created_at}</Text>
       </View>
       <View style={styles.buttonsActions}>

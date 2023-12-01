@@ -17,11 +17,6 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
     color: colors.textPrimary,
   },
-  description: {
-    fontSize: text.caption,
-    color: colors.textSecondary,
-    fontWeight: '500',
-  },
   date: {
     fontSize: text.info,
     textAlign: 'right',

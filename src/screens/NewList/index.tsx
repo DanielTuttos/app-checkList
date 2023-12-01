@@ -13,6 +13,8 @@ import {getInformationById, insertList} from '../../services';
 import Toast from 'react-native-toast-message';
 import {messageToast} from '../../helpers';
 import {Lists} from '../../interfaces/screen/Lists';
+import {Text} from 'react-native-paper';
+import AddItems from './AddItems';
 
 const NewList = () => {
   const route = useRoute<NewListScreenRouteProp>();
@@ -20,18 +22,9 @@ const NewList = () => {
     params: {item},
   } = route;
   const navigation = useNavigation<NewListScreenNavigationProp>();
-  // console.log('navgation: ', navigation, item);
-  const [description, setDescription] = useState(
-    item ? item.description || '' : '',
-  );
   const [title, setTitle] = useState(item ? item.title : '');
-  const [isEditable, setIsEditable] = useState(item ? false : true);
 
-  const editData = item ? true : false;
-
-  useEffect(() => {
-    setIsEditable(item ? false : true);
-  }, [item]);
+  const isSaved = item ? true : false;
 
   const db = useDBContext() as SQLiteDatabase;
 
@@ -44,7 +37,7 @@ const NewList = () => {
         });
         return;
       }
-      const data = await insertList(db, title, description);
+      const data = await insertList(db, title);
       if (data.length > 0) {
         const {insertId} = data[0];
         const itemData: Lists = await getInformationById(db, 'group', insertId);
@@ -61,28 +54,22 @@ const NewList = () => {
       title={item ? item.title : 'Nueva lista'}
       goBack={() => navigation.goBack()}>
       <View style={styles.container}>
-        <InputText
-          label="Título *"
-          onChange={value => setTitle(value)}
-          value={title}
-          editable={isEditable}
-          // customStyle={{
-          //   backgroundColor: editData ? 'grey' : '#ffffff',
-          // }}
-        />
-        <InputText
-          label="Descripcion"
-          onChange={value => setDescription(value)}
-          value={description}
-          multiline
-          numberOfLine={4}
-          editable={isEditable}
-        />
-        <Buttons
-          label={editData ? 'Editar' : 'Guardar'}
-          onPress={() => (editData ? setIsEditable(true) : createList())}
-          nameIcon={editData ? 'create-outline' : 'save-outline'}
-        />
+        {!isSaved ? (
+          <>
+            <InputText
+              label="Título *"
+              onChange={value => setTitle(value)}
+              value={title}
+            />
+            <Buttons
+              label={'Guardar'}
+              onPress={() => createList()}
+              nameIcon={'save-outline'}
+            />
+          </>
+        ) : (
+          <AddItems item={item ? item : ({} as Lists)} />
+        )}
       </View>
     </ScreenComponent>
   );

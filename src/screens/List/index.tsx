@@ -12,7 +12,8 @@ const List = () => {
   const db = useDBContext() as SQLiteDatabase;
 
   const [dataList, setDataList] = useState<Lists[]>([]);
-  // console.log('dataList ', dataList);
+
+  console.log('dataList: ', dataList)
 
   const navigation = useNavigation<ListScreenNavigationProp>();
 
@@ -33,7 +34,6 @@ const List = () => {
   return (
     <ScreenComponent title="Lista">
       <View style={styles.container}>
-        {/* <Button title='ingreso' onPress={insert} /> */}
         <FlatList
           style={styles.list}
           data={dataList}

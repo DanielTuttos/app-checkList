@@ -21,7 +21,7 @@ export async function createTable(db: SQLiteDatabase, query: string) {
 export async function createTables(db: SQLiteDatabase) {
   await createTable(
     db,
-    'CREATE TABLE IF NOT EXISTS "group"(id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(255), description VARCHAR, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, is_fav BOOLEAN DEFAULT false)',
+    'CREATE TABLE IF NOT EXISTS "group"(id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(255), created_at DATETIME DEFAULT CURRENT_TIMESTAMP, is_fav BOOLEAN DEFAULT false)',
   );
   await createTable(
     db,
@@ -31,10 +31,9 @@ export async function createTables(db: SQLiteDatabase) {
 
 export async function insertList(
   db: SQLiteDatabase,
-  title: string,
-  description?: string,
+  title: string
 ) {
-  const insertQuery = `INSERT INTO "group" (title, description) values ('${title}', '${description}')`;
+  const insertQuery = `INSERT INTO "group" (title) values ('${title}')`;
   const result = await db.executeSql(insertQuery);
   return result;
 }
