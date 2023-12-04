@@ -3,7 +3,6 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Favorites, Home, List} from '../screens';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {colors, text} from '../theme';
-// import {Tab} from '@react-navigation/buttons-tab';
 
 const TabNavigator = () => {
   const Tab = createBottomTabNavigator();

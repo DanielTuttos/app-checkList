@@ -3,7 +3,6 @@ import {
   enablePromise,
   openDatabase,
 } from 'react-native-sqlite-storage';
-import {Lists} from '../interfaces/screen/Lists';
 
 enablePromise(true);
 

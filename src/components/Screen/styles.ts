@@ -30,7 +30,6 @@ export const styles = StyleSheet.create({
   },
   iconContainer: {
     minWidth: wp(7.5),
-    // backgroundColor: 'red'
   },
   title: {
     fontSize: text.title,

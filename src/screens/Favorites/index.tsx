@@ -25,10 +25,8 @@ const Favorites = () => {
   const getList = async () => {
     try {
       const data: Lists[] = await getLists(db, 'group', true, 'is_fav', 1);
-      console.log('favoritos')
       setDataList(data);
     } catch (error) {
-      console.log('error favoritos: ', error)
       messageToast({
         type: 'error',
         text1: 'Error al obtener la lista de grupos',

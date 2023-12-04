@@ -8,7 +8,7 @@ import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import CheckBox from '../CheckBox';
 
 const CardItem: React.FC<CardItemProps> = ({item, updateCheck, deleteItem}) => {
-  // console.log('otems: ', item);
+
   return (
     <TouchableOpacity
       onPress={() => updateCheck(item.id, item.ischeck ? false : true)}

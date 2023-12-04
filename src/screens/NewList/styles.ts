@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: wp(4),
     paddingVertical: wp(3),
-    // backgroundColor: 'green',
 
   },
   textArea: {

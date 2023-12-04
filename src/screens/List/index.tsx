@@ -1,6 +1,6 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {View, FlatList} from 'react-native';
-import {deleteById, getLists, insertList, updateFieldDB} from '../../services';
+import {deleteById, getLists, updateFieldDB} from '../../services';
 import {useDBContext} from '../../context/DBContext';
 import {SQLiteDatabase} from 'react-native-sqlite-storage';
 import {CardGroup, FloatingButton, ScreenComponent} from '../../components';

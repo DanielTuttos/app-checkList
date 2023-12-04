@@ -39,7 +39,6 @@ const AddItems: React.FC<AddItemsProps> = ({dataList, db}) => {
         setTitle('');
       }
     } catch (error) {
-      console.log('error: ', {error});
       messageToast({
         type: 'error',
         text1: 'Error al guardar el item',
@@ -58,7 +57,6 @@ const AddItems: React.FC<AddItemsProps> = ({dataList, db}) => {
       );
       setItems(data);
     } catch (error) {
-      console.log('error: ', {error});
       messageToast({
         type: 'error',
         text1: 'Error al obtener los items',

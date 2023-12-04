@@ -18,9 +18,6 @@ const Navigator = () => {
       initialRouteName="Home"
       screenOptions={{
         headerShown: false,
-        cardStyle: {
-          // backgroundColor: 'white',
-        },
       }}>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="List" component={List} />
