@@ -10,7 +10,7 @@ import {
 import {styles} from './styles';
 import {AddItemsProps, Items} from '../../../interfaces/screen/NewList';
 import {messageToast} from '../../../helpers';
-import {getLists, insertItem} from '../../../services';
+import {getLists, insertItem, updateFieldDB, deleteById} from '../../../services';
 
 const AddItems: React.FC<AddItemsProps> = ({dataList, db}) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -66,6 +66,30 @@ const AddItems: React.FC<AddItemsProps> = ({dataList, db}) => {
     }
   };
 
+  const updateCheck = async (id: number, value: boolean) => {
+    try {
+      await updateFieldDB(db, 'lists', value, 'ischeck', id);
+      getListItems();
+    } catch (error) {
+      messageToast({
+        type: 'error',
+        text1: 'Error al actualizar el item',
+      });
+    }
+  };
+
+  const deleteItem = async (id: number) => {
+    try {
+      await deleteById(db, 'lists', id);
+      getListItems();
+    } catch (error) {
+      messageToast({
+        type: 'error',
+        text1: 'Error al eliminar el item',
+      });
+    }
+  };
+
   return (
     <>
       <Text style={styles.textTitle} numberOfLines={1}>
@@ -76,7 +100,13 @@ const AddItems: React.FC<AddItemsProps> = ({dataList, db}) => {
         style={styles.list}
         data={items}
         renderItem={({item}) => {
-          return <CardItem item={item} />;
+          return (
+            <CardItem
+              item={item}
+              updateCheck={updateCheck}
+              deleteItem={deleteItem}
+            />
+          );
         }}
       />
       <Modal

@@ -7,7 +7,6 @@ export const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.secondary,
     padding: wp(3),
-    // marginHorizontal: wp(2),
     marginTop: wp(1.5),
     marginBottom: wp(1.5),
     borderRadius: wp(2),
@@ -20,6 +19,8 @@ export const styles = StyleSheet.create({
     fontSize: text.subtitle,
     fontWeight: '700',
     color: colors.textPrimary,
+    marginLeft: wp(3),
+    width: wp(60)
   },
   buttonAction: {
     margin: 0,

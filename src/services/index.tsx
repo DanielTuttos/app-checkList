@@ -62,7 +62,6 @@ export async function getLists(
       lists.push(result.rows.item(index));
     }
   });
-  // console.log('lists: ', lists);
   return lists;
 }
 
@@ -73,4 +72,17 @@ export async function getInformationById(
 ) {
   const result = await db.executeSql(`SELECT * FROM "${table}" WHERE id=${id}`);
   return result[0].rows.item(0);
+}
+
+export async function updateFieldDB(db: SQLiteDatabase, tableName: string, valueUpdate: boolean, fieldName: string, id: number) {
+  const insertQuery = `UPDATE ${tableName} set ${fieldName} = ${valueUpdate} WHERE id = ${id}`;
+  const result = await db.executeSql(insertQuery);
+  return result;
+}
+
+export async function deleteById (db: SQLiteDatabase, tableName: string, id: number) {
+  'DELETE FROM usuarios WHERE id = 1'
+  const insertQuery = `DELETE FROM ${tableName} WHERE id = ${id}`;
+  const result = await db.executeSql(insertQuery);
+  return result;
 }

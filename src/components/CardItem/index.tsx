@@ -7,20 +7,23 @@ import {colors} from '../../theme';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import CheckBox from '../CheckBox';
 
-const CardItem: React.FC<CardItemProps> = ({item}) => {
+const CardItem: React.FC<CardItemProps> = ({item, updateCheck, deleteItem}) => {
   // console.log('otems: ', item);
   return (
     <TouchableOpacity
-      onPress={() => console.log('marcando como leido')}
+      onPress={() => updateCheck(item.id, item.ischeck ? false : true)}
       style={styles.container}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <CheckBox />
+        <CheckBox
+          value={item.ischeck ? true : false}
+          onChange={value => updateCheck(item.id, value)}
+        />
         <Text numberOfLines={1} style={styles.title}>
           {item.title}
         </Text>
       </View>
       <FloatingButton
-        onPress={() => console.log('eliminando item')}
+        onPress={() => deleteItem(item.id)}
         nameIcon={'trash-outline'}
         sizeIcon={wp(6)}
         colorIcon={colors.primary}
