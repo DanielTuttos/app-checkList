@@ -25,24 +25,38 @@ export async function createTables(db: SQLiteDatabase) {
   );
   await createTable(
     db,
-    'CREATE TABLE IF NOT EXISTS lists(id INTEGER PRIMARY KEY AUTOINCREMENT, description VARCHAR, ischeck BOOLEAN DEFAULT false, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, id_group INTEGER, FOREIGN KEY (id_group) REFERENCES "group"(id) )',
+    'CREATE TABLE IF NOT EXISTS lists(id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR, ischeck BOOLEAN DEFAULT false, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, id_group INTEGER, FOREIGN KEY (id_group) REFERENCES "group"(id) )',
   );
 }
 
-export async function insertList(
-  db: SQLiteDatabase,
-  title: string
-) {
+export async function insertList(db: SQLiteDatabase, title: string) {
   const insertQuery = `INSERT INTO "group" (title) values ('${title}')`;
   const result = await db.executeSql(insertQuery);
   return result;
 }
 
-export async function getLists(db: SQLiteDatabase, table: string) {
+export async function insertItem(
+  db: SQLiteDatabase,
+  title: string,
+  id_group: number,
+) {
+  const insertQuery = `INSERT INTO "lists" (title, id_group) values ('${title}', ${id_group})`;
+  const result = await db.executeSql(insertQuery);
+  return result;
+}
+
+export async function getLists(
+  db: SQLiteDatabase,
+  table: string,
+  isWhere?: boolean,
+  fieldWhere?: string,
+  valueWhere?: any,
+) {
   const lists: any[] = [];
-  const results = await db.executeSql(
-    `SELECT * FROM "${table}" ORDER BY created_at DESC`,
-  );
+  const query = isWhere
+    ? `SELECT * FROM "${table}" WHERE ${fieldWhere}='${valueWhere}' ORDER BY created_at DESC`
+    : `SELECT * FROM "${table}" ORDER BY created_at DESC`;
+  const results = await db.executeSql(query);
   results.forEach(result => {
     for (let index = 0; index < result.rows.length; index++) {
       lists.push(result.rows.item(index));

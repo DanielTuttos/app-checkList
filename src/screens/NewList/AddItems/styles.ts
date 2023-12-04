@@ -26,4 +26,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.backgroundTertiary,
     borderColor: colors.backgroundTertiary,
   },
+  list: {
+    
+  }
 });

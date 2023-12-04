@@ -45,7 +45,10 @@ const NewList = () => {
         messageToast({type: 'success', text1: 'Guardado correctamente.'});
       }
     } catch (error) {
-      console.log('error; ', {error});
+      messageToast({
+        type: 'error',
+        text1: 'Error al guardar la lista',
+      });
     }
   };
 
@@ -68,7 +71,7 @@ const NewList = () => {
             />
           </>
         ) : (
-          <AddItems item={item ? item : ({} as Lists)} />
+          <AddItems dataList={item ? item : ({} as Lists)} db={db} />
         )}
       </View>
     </ScreenComponent>

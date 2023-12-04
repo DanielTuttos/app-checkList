@@ -1,32 +1,84 @@
-import React, {useState} from 'react';
-import {Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {FlatList, Text, View} from 'react-native';
 import {Modal} from 'react-native-paper';
-import {Buttons, FloatingButton, InputText} from '../../../components';
+import {
+  Buttons,
+  CardItem,
+  FloatingButton,
+  InputText,
+} from '../../../components';
 import {styles} from './styles';
-import {AddItemsProps} from '../../../interfaces/screen/NewList';
+import {AddItemsProps, Items} from '../../../interfaces/screen/NewList';
 import {messageToast} from '../../../helpers';
+import {getLists, insertItem} from '../../../services';
 
-const AddItems: React.FC<AddItemsProps> = ({item}) => {
+const AddItems: React.FC<AddItemsProps> = ({dataList, db}) => {
   const [modalOpen, setModalOpen] = useState(false);
   const toogleModal = () => setModalOpen(prevState => !prevState);
   const [title, setTitle] = useState('');
 
-  const handlePressSave = () => {
-    if (!title) {
+  const [items, setItems] = useState<Items[]>();
+
+  useEffect(() => {
+    getListItems();
+  }, []);
+
+  const handlePressSave = async () => {
+    try {
+      if (!title) {
+        messageToast({
+          type: 'error',
+          text1: 'El campo título no debe ser vacío.',
+        });
+        return;
+      }
+      const dataInsert = await insertItem(db, title, dataList.id);
+      if (dataInsert.length > 0 && dataInsert[0].insertId) {
+        getListItems();
+        toogleModal();
+        setTitle('');
+      }
+    } catch (error) {
+      console.log('error: ', {error});
       messageToast({
         type: 'error',
-        text1: 'El campo título no debe ser vacío.',
+        text1: 'Error al guardar el item',
       });
-      return;
+    }
+  };
+
+  const getListItems = async () => {
+    try {
+      const data: Items[] = await getLists(
+        db,
+        'lists',
+        true,
+        'id_group',
+        dataList.id,
+      );
+      setItems(data);
+    } catch (error) {
+      console.log('error: ', {error});
+      messageToast({
+        type: 'error',
+        text1: 'Error al obtener los items',
+      });
     }
   };
 
   return (
     <>
       <Text style={styles.textTitle} numberOfLines={1}>
-        Check List "{item.title}"
+        Check List "{dataList.title}"
       </Text>
       <FloatingButton onPress={toogleModal} />
+      <FlatList
+        style={styles.list}
+        data={items}
+        renderItem={({item}) => {
+          return <CardItem item={item} />;
+        }}
+      />
       <Modal
         visible={modalOpen}
         onDismiss={toogleModal}
