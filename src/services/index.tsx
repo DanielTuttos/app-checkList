@@ -29,8 +29,8 @@ export async function createTables(db: SQLiteDatabase) {
   );
 }
 
-export async function insertList(db: SQLiteDatabase, title: string) {
-  const insertQuery = `INSERT INTO "group" (title) values ('${title}')`;
+export async function insertList(db: SQLiteDatabase, title: string, is_fav: boolean) {
+  const insertQuery = `INSERT INTO "group" (title, is_fav) values ('${title}', ${is_fav})`;
   const result = await db.executeSql(insertQuery);
   return result;
 }

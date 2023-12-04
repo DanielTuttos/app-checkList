@@ -19,7 +19,7 @@ import AddItems from './AddItems';
 const NewList = () => {
   const route = useRoute<NewListScreenRouteProp>();
   const {
-    params: {item},
+    params: {item, fromFav = false},
   } = route;
   const navigation = useNavigation<NewListScreenNavigationProp>();
   const [title, setTitle] = useState(item ? item.title : '');
@@ -37,7 +37,7 @@ const NewList = () => {
         });
         return;
       }
-      const data = await insertList(db, title);
+      const data = await insertList(db, title, fromFav);
       if (data.length > 0) {
         const {insertId} = data[0];
         const itemData: Lists = await getInformationById(db, 'group', insertId);
