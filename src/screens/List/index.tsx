@@ -1,19 +1,18 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {View, FlatList} from 'react-native';
-import {getLists, insertList} from '../../services';
+import {deleteById, getLists, insertList, updateFieldDB} from '../../services';
 import {useDBContext} from '../../context/DBContext';
 import {SQLiteDatabase} from 'react-native-sqlite-storage';
 import {CardGroup, FloatingButton, ScreenComponent} from '../../components';
 import {styles} from './styles';
 import {ListScreenNavigationProp, Lists} from '../../interfaces/screen/Lists';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {messageToast} from '../../helpers';
 
 const List = () => {
   const db = useDBContext() as SQLiteDatabase;
 
   const [dataList, setDataList] = useState<Lists[]>([]);
-
-  console.log('dataList: ', dataList)
 
   const navigation = useNavigation<ListScreenNavigationProp>();
 
@@ -28,9 +27,37 @@ const List = () => {
       const data: Lists[] = await getLists(db, 'group');
       setDataList(data);
     } catch (error) {
-      console.log('error; ', {error});
+      messageToast({
+        type: 'error',
+        text1: 'Error al obtener la lista de grupos',
+      });
     }
   };
+
+  const deleteCard = async (id: number) => {
+    try {
+      await deleteById(db, 'group', id);
+      getList();
+    } catch (error) {
+      messageToast({
+        type: 'error',
+        text1: 'Error al eliminar el grupo',
+      });
+    }
+  };
+
+  const addFavotire = async (id: number, value: boolean) => {
+    try {
+      await updateFieldDB(db, 'group', value, 'is_fav', id);
+      getList();
+    } catch (error) {
+      messageToast({
+        type: 'error',
+        text1: 'Error al actualizar el grupo',
+      });
+    }
+  };
+
   return (
     <ScreenComponent title="Lista">
       <View style={styles.container}>
@@ -39,7 +66,13 @@ const List = () => {
           data={dataList}
           renderItem={({item}) => {
             return (
-              <CardGroup key={item.id} item={item} navigation={navigation} />
+              <CardGroup
+                key={item.id}
+                item={item}
+                navigation={navigation}
+                deleteCard={deleteCard}
+                addFavotire={addFavotire}
+              />
             );
           }}
         />

@@ -6,16 +6,16 @@ import {colors} from '../../theme';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import FloatingButton from '../FloatingButton';
 
-const CardGroup: React.FC<CardGroupProps> = ({item, navigation}) => {
+const CardGroup: React.FC<CardGroupProps> = ({
+  item,
+  navigation,
+  deleteCard,
+  addFavotire,
+}) => {
   const openCard = () => {
     navigation.navigate('NewList', {item});
   };
-  const addFavotire = () => {
-    console.log('add favorite: ', item.id);
-  };
-  const deleteCard = () => {
-    console.log('delete: ', item.id);
-  };
+
   return (
     <TouchableOpacity onPress={openCard} style={styles.container}>
       <View>
@@ -26,14 +26,14 @@ const CardGroup: React.FC<CardGroupProps> = ({item, navigation}) => {
       </View>
       <View style={styles.buttonsActions}>
         <FloatingButton
-          onPress={addFavotire}
+          onPress={() => addFavotire(item.id, item.is_fav ? false : true)}
           nameIcon={item.is_fav ? 'star' : 'star-outline'}
           sizeIcon={wp(6)}
           colorIcon={colors.primary}
           customStyles={styles.buttonAction}
         />
         <FloatingButton
-          onPress={deleteCard}
+          onPress={() => deleteCard(item.id)}
           nameIcon={'trash-outline'}
           sizeIcon={wp(6)}
           colorIcon={colors.primary}

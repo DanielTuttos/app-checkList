@@ -20,7 +20,6 @@ const CheckBox: React.FC<CheckBoxProps> = ({value, onChange}) => {
           name={'checkmark-outline'}
           size={20}
           color={colors.backgroundPrimary}
-          style={{fontWeight: '800'}}
         />
       )}
     </TouchableOpacity>
