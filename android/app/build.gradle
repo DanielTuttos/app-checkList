@@ -73,9 +73,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.appchecklist"
+    namespace "com.danielromeroag.appchecklist"
     defaultConfig {
-        applicationId "com.appchecklist"
+        applicationId "com.danielromeroag.appchecklist"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

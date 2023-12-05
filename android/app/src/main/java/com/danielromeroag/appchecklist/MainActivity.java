@@ -1,4 +1,5 @@
-package com.appchecklist;
+// package com.appchecklist;
+package com.danielromeroag.appchecklist;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
