@@ -2,6 +2,9 @@ import React, {createContext, useContext, useState, useEffect} from 'react';
 import {createTables, getDBConnection} from '../services';
 import {SQLiteDatabase} from 'react-native-sqlite-storage';
 import {Image, Text, View} from 'react-native';
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import { ActivityIndicator } from 'react-native-paper';
+import { colors } from '../theme';
 
 const DbContext = createContext({});
 
@@ -39,10 +42,7 @@ export function DbContextProvider({children}: any) {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <Image
-          style={{width: 150, height: 150, borderRadius: 50}}
-          source={require('../assets/iconoAppCheckList.png')}
-        />
+        <ActivityIndicator size={wp(15)} color={colors.primary}  />
       </View>
     );
   }
