@@ -78,8 +78,8 @@ android {
         applicationId "com.danielromeroag.appchecklist"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 1 // cambiar a cada nueva version
+        versionName "1.0" // cambiar a cada nueva version
     }
     signingConfigs {
         debug {
