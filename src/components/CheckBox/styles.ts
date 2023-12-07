@@ -11,5 +11,7 @@ export const styles = StyleSheet.create({
     borderColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
+    alignContent: 'center',
+    padding: 0
   },
 });

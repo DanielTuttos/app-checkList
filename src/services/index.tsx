@@ -28,7 +28,7 @@ export async function createTables(db: SQLiteDatabase) {
   );
 }
 
-export async function insertList(db: SQLiteDatabase, title: string, is_fav: boolean) {
+export async function insertList(db: SQLiteDatabase, title: string, is_fav: number) {
   const insertQuery = `INSERT INTO "group" (title, is_fav) values ('${title}', ${is_fav})`;
   const result = await db.executeSql(insertQuery);
   return result;
@@ -39,7 +39,7 @@ export async function insertItem(
   title: string,
   id_group: number,
 ) {
-  const insertQuery = `INSERT INTO "lists" (title, id_group) values ('${title}', ${id_group})`;
+  const insertQuery = `INSERT INTO "lists" (title, id_group, ischeck) values ('${title}', ${id_group}, 0)`;
   const result = await db.executeSql(insertQuery);
   return result;
 }
@@ -73,7 +73,7 @@ export async function getInformationById(
   return result[0].rows.item(0);
 }
 
-export async function updateFieldDB(db: SQLiteDatabase, tableName: string, valueUpdate: boolean, fieldName: string, id: number) {
+export async function updateFieldDB(db: SQLiteDatabase, tableName: string, valueUpdate: number, fieldName: string, id: number) {
   const insertQuery = `UPDATE "${tableName}" set ${fieldName} = ${valueUpdate} WHERE id = ${id}`;
   const result = await db.executeSql(insertQuery);
   return result;

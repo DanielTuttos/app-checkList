@@ -37,7 +37,7 @@ const NewList = () => {
         });
         return;
       }
-      const data = await insertList(db, title, fromFav);
+      const data = await insertList(db, title, fromFav ? 1 : 0);
       if (data.length > 0) {
         const {insertId} = data[0];
         const itemData: Lists = await getInformationById(db, 'group', insertId);

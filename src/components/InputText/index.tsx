@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {TextInput} from 'react-native-paper';
 import {styles} from './styles';
-import { colors } from '../../theme';
-import { InputTextProps } from '../../interfaces/components/inputText';
+import {colors} from '../../theme';
+import {InputTextProps} from '../../interfaces/components/inputText';
 
 const InputText: React.FC<InputTextProps> = ({
   value,
@@ -11,11 +11,14 @@ const InputText: React.FC<InputTextProps> = ({
   customStyle,
   multiline = false,
   numberOfLine = 1,
-  editable = true
+  editable = true,
 }) => {
+  const [isFocus, setIsFocus] = useState(false);
   return (
     <TextInput
-      label={label}
+      onFocus={() => setIsFocus(true)}
+      label={isFocus ? label : ''}
+      placeholder={label}
       mode="outlined"
       multiline={multiline}
       numberOfLines={numberOfLine}
@@ -26,9 +29,11 @@ const InputText: React.FC<InputTextProps> = ({
       outlineColor={colors.primary}
       selectionColor={colors.primary}
       activeOutlineColor={colors.primary}
+      placeholderTextColor={colors.textSecondary}
       outlineStyle={{
-        borderWidth: 2
+        borderWidth: 2,
       }}
+      textColor={colors.textPrimary}
       editable={editable}
     />
   );

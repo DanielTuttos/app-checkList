@@ -1,13 +1,13 @@
 import React, {useState, useCallback} from 'react';
 import {Text, View, FlatList} from 'react-native';
-import { CardGroup, FloatingButton, ScreenComponent } from '../../components';
-import { styles } from './styles';
-import { useDBContext } from '../../context/DBContext';
-import { SQLiteDatabase } from 'react-native-sqlite-storage';
-import { ListScreenNavigationProp, Lists } from '../../interfaces/screen/Lists';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import { deleteById, getLists, updateFieldDB } from '../../services';
-import { messageToast } from '../../helpers';
+import {CardGroup, FloatingButton, ScreenComponent} from '../../components';
+import {styles} from './styles';
+import {useDBContext} from '../../context/DBContext';
+import {SQLiteDatabase} from 'react-native-sqlite-storage';
+import {ListScreenNavigationProp, Lists} from '../../interfaces/screen/Lists';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {deleteById, getLists, updateFieldDB} from '../../services';
+import {messageToast} from '../../helpers';
 
 const Favorites = () => {
   const db = useDBContext() as SQLiteDatabase;
@@ -48,7 +48,7 @@ const Favorites = () => {
 
   const addFavotire = async (id: number, value: boolean) => {
     try {
-      await updateFieldDB(db, 'group', value, 'is_fav', id);
+      await updateFieldDB(db, 'group', value ? 1 : 0, 'is_fav', id);
       getList();
     } catch (error) {
       messageToast({
@@ -75,7 +75,9 @@ const Favorites = () => {
             );
           }}
         />
-        <FloatingButton onPress={() => navigation.navigate('NewList', {fromFav: true})} />
+        <FloatingButton
+          onPress={() => navigation.navigate('NewList', {fromFav: true})}
+        />
       </View>
     </ScreenComponent>
   );

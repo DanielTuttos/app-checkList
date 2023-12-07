@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: colors.backgroundPrimary,
-    height: hp(6),
+    height: hp(7),
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

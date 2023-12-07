@@ -6,4 +6,5 @@ export interface ButtonsProps {
   onPress: () => void;
   customStyle?: ViewStyle;
   mode?: 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal';
+  colorText?: string;
 }

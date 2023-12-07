@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {colors, text} from '../../../theme';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
+import {hexToRgb} from '../../../helpers';
 
 export const styles = StyleSheet.create({
   container: {
@@ -23,10 +24,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   customButtonCancel: {
-    backgroundColor: colors.backgroundTertiary,
-    borderColor: colors.backgroundTertiary,
+    backgroundColor: hexToRgb(colors.primary, 0.5),
+    borderColor: hexToRgb(colors.primary, 0.5),
   },
-  list: {
-    
-  }
+  list: {},
 });

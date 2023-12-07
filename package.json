@@ -9,7 +9,8 @@
     "start": "react-native start",
     "test": "jest",
     "clean": "cd android && ./gradlew clean && cd .. && npx react-native run-android",
-    "release": "npx react-native build-android --mode=release"
+    "release": "npx react-native build-android --mode=release",
+    "apkrelease": "cd android && ./gradlew assembleRelease && cd .."
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^6.5.11",

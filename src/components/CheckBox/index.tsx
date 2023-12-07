@@ -18,7 +18,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({value, onChange}) => {
       {value && (
         <Ionicons
           name={'checkmark-outline'}
-          size={20}
+          size={15}
           color={colors.backgroundPrimary}
         />
       )}

@@ -3,6 +3,7 @@ import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {styles} from './styles';
 import {ScreenProps} from '../../interfaces/components/screen';
+import { colors } from '../../theme';
 
 const ScreenComponent: React.FC<ScreenProps> = props => {
   const {children, title, goBack} = props;
@@ -12,7 +13,7 @@ const ScreenComponent: React.FC<ScreenProps> = props => {
       <View style={styles.header}>
         {goBack && (
           <TouchableOpacity style={styles.iconContainer} onPress={goBack}>
-            <Ionicons name="arrow-back-outline" size={25} />
+            <Ionicons name="arrow-back-outline" size={25} color={colors.textPrimary} />
           </TouchableOpacity>
         )}
         <Text style={styles.title}>{title}</Text>

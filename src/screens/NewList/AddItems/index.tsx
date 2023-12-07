@@ -10,7 +10,13 @@ import {
 import {styles} from './styles';
 import {AddItemsProps, Items} from '../../../interfaces/screen/NewList';
 import {messageToast} from '../../../helpers';
-import {getLists, insertItem, updateFieldDB, deleteById} from '../../../services';
+import {
+  getLists,
+  insertItem,
+  updateFieldDB,
+  deleteById,
+} from '../../../services';
+import { colors } from '../../../theme';
 
 const AddItems: React.FC<AddItemsProps> = ({dataList, db}) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -66,7 +72,7 @@ const AddItems: React.FC<AddItemsProps> = ({dataList, db}) => {
 
   const updateCheck = async (id: number, value: boolean) => {
     try {
-      await updateFieldDB(db, 'lists', value, 'ischeck', id);
+      await updateFieldDB(db, 'lists', value ? 1 : 0, 'ischeck', id);
       getListItems();
     } catch (error) {
       messageToast({
@@ -124,6 +130,7 @@ const AddItems: React.FC<AddItemsProps> = ({dataList, db}) => {
             nameIcon="close-circle-outline"
             customStyle={styles.customButtonCancel}
             mode={'outlined'}
+            colorText={colors.textPrimary}
           />
           <Buttons
             label="Guardar"

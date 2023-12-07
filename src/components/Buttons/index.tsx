@@ -3,6 +3,7 @@ import {ButtonsProps} from '../../interfaces/components/buttons';
 import {Button} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {styles} from './styles';
+import { colors } from '../../theme';
 
 const Buttons: React.FC<ButtonsProps> = ({
   label,
@@ -10,6 +11,7 @@ const Buttons: React.FC<ButtonsProps> = ({
   nameIcon,
   customStyle,
   mode = 'contained',
+  colorText = colors.backgroundPrimary
 }) => {
   return (
     <Button
@@ -18,6 +20,7 @@ const Buttons: React.FC<ButtonsProps> = ({
       }
       mode={mode}
       onPress={onPress}
+      textColor={colorText}
       style={[styles.button, customStyle]}>
       {label}
     </Button>

@@ -48,7 +48,7 @@ const List = () => {
 
   const addFavotire = async (id: number, value: boolean) => {
     try {
-      await updateFieldDB(db, 'group', value, 'is_fav', id);
+      await updateFieldDB(db, 'group', value ? 1 : 0, 'is_fav', id);
       getList();
     } catch (error) {
       messageToast({
