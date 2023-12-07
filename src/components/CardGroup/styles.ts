@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
   date: {
     fontSize: text.info,
     textAlign: 'right',
+    color: colors.textSecondary
   },
   buttonsActions: {
     flexDirection: 'row',
