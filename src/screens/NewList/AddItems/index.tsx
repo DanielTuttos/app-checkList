@@ -6,6 +6,7 @@ import {
   CardItem,
   FloatingButton,
   InputText,
+  Message,
 } from '../../../components';
 import {styles} from './styles';
 import {AddItemsProps, Items} from '../../../interfaces/screen/NewList';
@@ -16,14 +17,14 @@ import {
   updateFieldDB,
   deleteById,
 } from '../../../services';
-import { colors } from '../../../theme';
+import {colors} from '../../../theme';
 
 const AddItems: React.FC<AddItemsProps> = ({dataList, db}) => {
   const [modalOpen, setModalOpen] = useState(false);
   const toogleModal = () => setModalOpen(prevState => !prevState);
   const [title, setTitle] = useState('');
 
-  const [items, setItems] = useState<Items[]>();
+  const [items, setItems] = useState<Items[]>([]);
 
   useEffect(() => {
     getListItems();
@@ -100,19 +101,23 @@ const AddItems: React.FC<AddItemsProps> = ({dataList, db}) => {
         Check List "{dataList.title}"
       </Text>
       <FloatingButton onPress={toogleModal} />
-      <FlatList
-        style={styles.list}
-        data={items}
-        renderItem={({item}) => {
-          return (
-            <CardItem
-              item={item}
-              updateCheck={updateCheck}
-              deleteItem={deleteItem}
-            />
-          );
-        }}
-      />
+      {items.length <= 0 ? (
+        <Message text="No existen datos guardados." />
+      ) : (
+        <FlatList
+          style={styles.list}
+          data={items}
+          renderItem={({item}) => {
+            return (
+              <CardItem
+                item={item}
+                updateCheck={updateCheck}
+                deleteItem={deleteItem}
+              />
+            );
+          }}
+        />
+      )}
       <Modal
         visible={modalOpen}
         onDismiss={toogleModal}

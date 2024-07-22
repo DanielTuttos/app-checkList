@@ -1,6 +1,11 @@
 import React, {useState, useCallback} from 'react';
 import {Text, View, FlatList} from 'react-native';
-import {CardGroup, FloatingButton, ScreenComponent} from '../../components';
+import {
+  CardGroup,
+  FloatingButton,
+  Message,
+  ScreenComponent,
+} from '../../components';
 import {styles} from './styles';
 import {useDBContext} from '../../context/DBContext';
 import {SQLiteDatabase} from 'react-native-sqlite-storage';
@@ -60,21 +65,25 @@ const Favorites = () => {
   return (
     <ScreenComponent title="Favoritos">
       <View style={styles.container}>
-        <FlatList
-          style={styles.list}
-          data={dataList}
-          renderItem={({item}) => {
-            return (
-              <CardGroup
-                key={item.id}
-                item={item}
-                navigation={navigation}
-                deleteCard={deleteCard}
-                addFavotire={addFavotire}
-              />
-            );
-          }}
-        />
+        {dataList.length <= 0 ? (
+          <Message text="No existen datos guardados." />
+        ) : (
+          <FlatList
+            style={styles.list}
+            data={dataList}
+            renderItem={({item}) => {
+              return (
+                <CardGroup
+                  key={item.id}
+                  item={item}
+                  navigation={navigation}
+                  deleteCard={deleteCard}
+                  addFavotire={addFavotire}
+                />
+              );
+            }}
+          />
+        )}
         <FloatingButton
           onPress={() => navigation.navigate('NewList', {fromFav: true})}
         />

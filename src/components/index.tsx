@@ -5,6 +5,7 @@ import InputText from './InputText';
 import Buttons from './Buttons';
 import CardItem from './CardItem';
 import CheckBox from './CheckBox';
+import {Message} from './Message';
 
 export {
   ScreenComponent,
@@ -13,5 +14,6 @@ export {
   InputText,
   Buttons,
   CardItem,
-  CheckBox
+  CheckBox,
+  Message,
 };
