@@ -1,3 +1,16 @@
 {
-  "extends": "@tsconfig/react-native/tsconfig.json"
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  // "compilerOptions": {
+  //   // otras configuraciones
+  //   "baseUrl": "src",
+  //   "paths": {
+  //     "@/*": ["./*"],
+  //     "*": ["types/*"]
+  //   }
+  // },
+  // "include": [
+  //   "src/**/*.ts",
+  //   "src/**/*.tsx",
+  //   "src/types/images.d.ts"
+  // ]
 }
