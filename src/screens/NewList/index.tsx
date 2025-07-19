@@ -26,9 +26,10 @@ const NewList = () => {
 
   const isSaved = item ? true : false;
 
-  const db = useDBContext() as SQLiteDatabase;
+  const db = useDBContext();
 
   const createList = async () => {
+    if (!db) return;
     try {
       if (!title) {
         messageToast({
@@ -71,7 +72,7 @@ const NewList = () => {
             />
           </>
         ) : (
-          <AddItems dataList={item ? item : ({} as Lists)} db={db} />
+          db && <AddItems dataList={item ? item : ({} as Lists)} db={db} />
         )}
       </View>
     </ScreenComponent>

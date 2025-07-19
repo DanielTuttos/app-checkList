@@ -16,7 +16,7 @@ import {messageToast} from '../../helpers';
 import {Text} from 'react-native-paper';
 
 const List = () => {
-  const db = useDBContext() as SQLiteDatabase;
+  const db = useDBContext();
 
   const [dataList, setDataList] = useState<Lists[]>([]);
 
@@ -29,6 +29,7 @@ const List = () => {
   );
 
   const getList = async () => {
+    if (!db) return;
     try {
       const data: Lists[] = await getLists(db, 'group');
       setDataList(data);
@@ -41,6 +42,7 @@ const List = () => {
   };
 
   const deleteCard = async (id: number) => {
+    if (!db) return;
     try {
       await deleteById(db, 'group', id);
       getList();
@@ -53,6 +55,7 @@ const List = () => {
   };
 
   const addFavotire = async (id: number, value: boolean) => {
+    if (!db) return;
     try {
       await updateFieldDB(db, 'group', value ? 1 : 0, 'is_fav', id);
       getList();

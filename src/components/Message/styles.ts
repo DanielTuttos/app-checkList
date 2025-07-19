@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {colors, text} from '../../theme';
+import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 
 export const styles = StyleSheet.create({
   mainContainer: {
@@ -13,5 +14,9 @@ export const styles = StyleSheet.create({
     color: colors.textPrimary,
     fontSize: text.title,
     fontWeight: 'bold',
+  },
+  image: {
+    width: wp(60),
+    height: wp(60),
   },
 });

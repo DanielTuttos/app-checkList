@@ -15,7 +15,7 @@ import {deleteById, getLists, updateFieldDB} from '../../services';
 import {messageToast} from '../../helpers';
 
 const Favorites = () => {
-  const db = useDBContext() as SQLiteDatabase;
+  const db = useDBContext();
 
   const [dataList, setDataList] = useState<Lists[]>([]);
 
@@ -28,6 +28,7 @@ const Favorites = () => {
   );
 
   const getList = async () => {
+    if (!db) return;
     try {
       const data: Lists[] = await getLists(db, 'group', true, 'is_fav', 1);
       setDataList(data);
@@ -40,6 +41,7 @@ const Favorites = () => {
   };
 
   const deleteCard = async (id: number) => {
+    if (!db) return;
     try {
       await deleteById(db, 'group', id);
       getList();
@@ -52,6 +54,7 @@ const Favorites = () => {
   };
 
   const addFavotire = async (id: number, value: boolean) => {
+    if (!db) return;
     try {
       await updateFieldDB(db, 'group', value ? 1 : 0, 'is_fav', id);
       getList();

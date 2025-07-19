@@ -6,7 +6,7 @@ import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { ActivityIndicator } from 'react-native-paper';
 import { colors } from '../theme';
 
-const DbContext = createContext({});
+const DbContext = createContext<SQLiteDatabase | null>(null);
 
 export function useDBContext() {
   return useContext(DbContext);
@@ -14,7 +14,8 @@ export function useDBContext() {
 
 export function DbContextProvider({children}: any) {
   const [isLoading, setIsLoading] = useState(true);
-  const [db, setDb] = useState<SQLiteDatabase>({} as SQLiteDatabase);
+  const [db, setDb] = useState<SQLiteDatabase | null>(null);
+  const [error, setError] = useState<string | null>(null);
   useEffect(() => {
     let _db: SQLiteDatabase;
     const getConnection = async () => {
@@ -25,12 +26,16 @@ export function DbContextProvider({children}: any) {
         setIsLoading(false);
       } catch (error) {
         console.log('DbContextProvider', {error});
+        setError(error instanceof Error ? error.message : 'Error desconocido');
+        setIsLoading(false);
       }
     };
     getConnection();
     return function () {
-      _db.close();
-      setDb({} as SQLiteDatabase);
+      if (_db) {
+        _db.close();
+      }
+      setDb(null);
     };
   }, []);
 
@@ -43,6 +48,22 @@ export function DbContextProvider({children}: any) {
           alignItems: 'center',
         }}>
         <ActivityIndicator size={wp(15)} color={colors.primary}  />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: 20,
+        }}>
+        <Text style={{color: 'red', textAlign: 'center', marginBottom: 20}}>
+          Error al cargar la base de datos: {error}
+        </Text>
       </View>
     );
   }

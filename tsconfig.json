@@ -1,5 +1,8 @@
 {
-  "extends": "@tsconfig/react-native/tsconfig.json",
+   "compilerOptions": {
+     "jsx": "react"
+   },
+   "extends": "@react-native/typescript-config"
   // "compilerOptions": {
   //   // otras configuraciones
   //   "baseUrl": "src",
