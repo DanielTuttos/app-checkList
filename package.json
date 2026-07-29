@@ -10,7 +10,7 @@
     "test": "jest",
     "clean": "cd android && ./gradlew clean && cd .. && npx react-native run-android",
     "clean-all": "rm -rf node_modules && npm install && cd android && ./gradlew clean && cd ..",
-    "release": "npx react-native build-android --mode=release",
+    "release": "cd android && ./gradlew clean && cd .. && npx react-native build-android --mode=release",
     "apkrelease": "cd android && ./gradlew assembleRelease && cd ..",
     "svgTransformer": "npx @svgr/cli --native --icon --ext tsx --out-dir ./src/assets ./src/assets",
     "pods": "cd ios && NO_FLIPPER=1 pod install && cd .."

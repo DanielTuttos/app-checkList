@@ -144,3 +144,9 @@ project.ext.vectoricons = [
     iconFontNames: [ 'Ionicons.ttf' ] // Specify font files
 ]
 apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
+
+afterEvaluate {
+    if (tasks.findByName("generateReleaseLintVitalReportModel") && tasks.findByName("copyReactNativeVectorIconFonts")) {
+        tasks.generateReleaseLintVitalReportModel.dependsOn(tasks.copyReactNativeVectorIconFonts)
+    }
+}
